@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Q06_InterfaceIPayable")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+54ce48e66ee22506f94f3b1a33c51002bd243e54")]
 [assembly: System.Reflection.AssemblyProductAttribute("Q06_InterfaceIPayable")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Q06_InterfaceIPayable")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
