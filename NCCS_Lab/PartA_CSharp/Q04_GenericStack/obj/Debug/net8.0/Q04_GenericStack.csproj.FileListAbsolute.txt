@@ -1,0 +1,14 @@
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q04_GenericStack\bin\Debug\net8.0\Q04_GenericStack.exe
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q04_GenericStack\bin\Debug\net8.0\Q04_GenericStack.deps.json
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q04_GenericStack\bin\Debug\net8.0\Q04_GenericStack.runtimeconfig.json
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q04_GenericStack\bin\Debug\net8.0\Q04_GenericStack.dll
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q04_GenericStack\bin\Debug\net8.0\Q04_GenericStack.pdb
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q04_GenericStack\obj\Debug\net8.0\Q04_GenericStack.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q04_GenericStack\obj\Debug\net8.0\Q04_GenericStack.AssemblyInfoInputs.cache
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q04_GenericStack\obj\Debug\net8.0\Q04_GenericStack.AssemblyInfo.cs
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q04_GenericStack\obj\Debug\net8.0\Q04_GenericStack.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q04_GenericStack\obj\Debug\net8.0\Q04_GenericStack.dll
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q04_GenericStack\obj\Debug\net8.0\refint\Q04_GenericStack.dll
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q04_GenericStack\obj\Debug\net8.0\Q04_GenericStack.pdb
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q04_GenericStack\obj\Debug\net8.0\Q04_GenericStack.genruntimeconfig.cache
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q04_GenericStack\obj\Debug\net8.0\ref\Q04_GenericStack.dll

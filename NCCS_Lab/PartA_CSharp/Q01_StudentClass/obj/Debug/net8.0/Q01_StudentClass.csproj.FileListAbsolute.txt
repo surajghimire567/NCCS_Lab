@@ -1,0 +1,14 @@
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q01_StudentClass\bin\Debug\net8.0\Q01_StudentClass.exe
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q01_StudentClass\bin\Debug\net8.0\Q01_StudentClass.deps.json
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q01_StudentClass\bin\Debug\net8.0\Q01_StudentClass.runtimeconfig.json
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q01_StudentClass\bin\Debug\net8.0\Q01_StudentClass.dll
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q01_StudentClass\bin\Debug\net8.0\Q01_StudentClass.pdb
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q01_StudentClass\obj\Debug\net8.0\Q01_StudentClass.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q01_StudentClass\obj\Debug\net8.0\Q01_StudentClass.AssemblyInfoInputs.cache
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q01_StudentClass\obj\Debug\net8.0\Q01_StudentClass.AssemblyInfo.cs
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q01_StudentClass\obj\Debug\net8.0\Q01_StudentClass.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q01_StudentClass\obj\Debug\net8.0\Q01_StudentClass.dll
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q01_StudentClass\obj\Debug\net8.0\refint\Q01_StudentClass.dll
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q01_StudentClass\obj\Debug\net8.0\Q01_StudentClass.pdb
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q01_StudentClass\obj\Debug\net8.0\Q01_StudentClass.genruntimeconfig.cache
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q01_StudentClass\obj\Debug\net8.0\ref\Q01_StudentClass.dll

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="NCCS_Lab_MV\**" />
+    <EmbeddedResource Remove="NCCS_Lab_MV\**" />
+    <None Remove="NCCS_Lab_MV\**" />
+    <Content Remove="NCCS_Lab_MV\**" />
+  </ItemGroup>
+</Project>

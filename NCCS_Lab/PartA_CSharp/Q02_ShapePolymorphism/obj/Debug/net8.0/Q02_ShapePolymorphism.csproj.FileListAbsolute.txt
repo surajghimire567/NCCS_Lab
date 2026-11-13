@@ -1,0 +1,14 @@
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q02_ShapePolymorphism\bin\Debug\net8.0\Q02_ShapePolymorphism.exe
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q02_ShapePolymorphism\bin\Debug\net8.0\Q02_ShapePolymorphism.deps.json
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q02_ShapePolymorphism\bin\Debug\net8.0\Q02_ShapePolymorphism.runtimeconfig.json
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q02_ShapePolymorphism\bin\Debug\net8.0\Q02_ShapePolymorphism.dll
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q02_ShapePolymorphism\bin\Debug\net8.0\Q02_ShapePolymorphism.pdb
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q02_ShapePolymorphism\obj\Debug\net8.0\Q02_ShapePolymorphism.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q02_ShapePolymorphism\obj\Debug\net8.0\Q02_ShapePolymorphism.AssemblyInfoInputs.cache
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q02_ShapePolymorphism\obj\Debug\net8.0\Q02_ShapePolymorphism.AssemblyInfo.cs
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q02_ShapePolymorphism\obj\Debug\net8.0\Q02_ShapePolymorphism.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q02_ShapePolymorphism\obj\Debug\net8.0\Q02_ShapePolymorphism.dll
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q02_ShapePolymorphism\obj\Debug\net8.0\refint\Q02_ShapePolymorphism.dll
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q02_ShapePolymorphism\obj\Debug\net8.0\Q02_ShapePolymorphism.pdb
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q02_ShapePolymorphism\obj\Debug\net8.0\Q02_ShapePolymorphism.genruntimeconfig.cache
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q02_ShapePolymorphism\obj\Debug\net8.0\ref\Q02_ShapePolymorphism.dll

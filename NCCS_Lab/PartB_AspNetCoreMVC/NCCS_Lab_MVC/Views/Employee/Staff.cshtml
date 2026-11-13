@@ -1,0 +1,28 @@
+@model IEnumerable<NCCS_Lab_MVC.Models.Employee>
+@{
+    ViewData["Title"] = "Staff";
+}
+
+<h2>Staff</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var employee in Model)
+    {
+        <tr>
+            <td>@employee.Id</td>
+            <td>@employee.Name</td>
+            <td>@employee.Age</td>
+            <td>@employee.Email</td>
+        </tr>
+    }
+    </tbody>
+</table>

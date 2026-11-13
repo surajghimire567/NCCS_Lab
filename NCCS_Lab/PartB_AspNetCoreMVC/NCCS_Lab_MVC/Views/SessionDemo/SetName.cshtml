@@ -1,0 +1,8 @@
+@{
+    ViewData["Title"] = "Set Name (Session Demo)";
+}
+<h2>Enter your name</h2>
+<form asp-action="SetName" method="post">
+    <input type="text" name="userName" class="form-control" placeholder="Your name" required />
+    <button type="submit" class="btn btn-primary mt-2">Save to Session</button>
+</form>

@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "U5BqRb4QSCQ=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Admin\\Downloads\\NCCS_Lab\\NCCS_Lab\\PartB_AspNetCoreMVC\\Q11_ProjectStructure\\Q11_ProjectStructure.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.19\\microsoft.netcore.app.ref.9.0.19.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.19\\microsoft.windowsdesktop.app.ref.9.0.19.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.19\\microsoft.aspnetcore.app.ref.9.0.19.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\9.0.19\\microsoft.netcore.app.host.win-x64.9.0.19.nupkg.sha512"
+  ],
+  "logs": []
+}

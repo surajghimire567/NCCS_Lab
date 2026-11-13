@@ -1,0 +1,190 @@
+NCCS Lab - Changes Compared With Original
+==========================================
+
+This file lists the changes made during troubleshooting and demo setup.
+
+
+1. PartA_CSharp\Q04_GenericStack\Q04_GenericStack.csproj
+----------------------------------------------------------------
+
+BEFORE:
+- The project used the default .NET SDK file inclusion rules.
+- The unrelated nested folder "NCCS_Lab_MV" was included during compilation.
+- This caused duplicate Program declarations and Razor/MVC compilation errors.
+- Relevant project file:
+    <Project Sdk="Microsoft.NET.Sdk">
+      ...
+    </Project>
+
+AFTER:
+- Added exclusions for the nested "NCCS_Lab_MV" folder:
+  Compile
+  EmbeddedResource
+  None
+  Content
+- Added project file section:
+    <ItemGroup>
+      <Compile Remove="NCCS_Lab_MV\**" />
+      <EmbeddedResource Remove="NCCS_Lab_MV\**" />
+      <None Remove="NCCS_Lab_MV\**" />
+      <Content Remove="NCCS_Lab_MV\**" />
+    </ItemGroup>
+- Q04 now compiles only its own generic stack console application files.
+
+
+2. PartB_AspNetCoreMVC\NCCS_Lab_MVC\Program.cs
+------------------------------------------------
+
+BEFORE:
+- The production exception-handling block contained stray "S" characters:
+    if (!app.Environment.IsDevelopment())
+    {S
+        app.UseExceptionHandler("/Home/Error");
+        app.UseHsts();S
+    }
+- The project could not compile.
+- Razor Pages services and endpoint mapping were not registered.
+- A new SQLite database did not automatically receive its schema.
+- The Users table required by Q20 was not created.
+- Q19 did not automatically create the Admin role or demo Admin account.
+
+AFTER:
+- Removed the stray "S" characters.
+- Corrected code:
+    if (!app.Environment.IsDevelopment())
+    {
+        app.UseExceptionHandler("/Home/Error");
+        app.UseHsts();
+    }
+- Added:
+    builder.Services.AddRazorPages();
+- Added database setup:
+    using (var scope = app.Services.CreateScope())
+    {
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        db.Database.EnsureCreated();
+    }
+- Added startup database initialization with:
+    db.Database.EnsureCreated();
+- Added the Q20 Users table and sample records:
+    alice
+    bob
+- Added the Q19 Admin role.
+- Added the Q19 demo account:
+    Email: admin@localhost
+    Password: Admin123!
+- Added the Admin role to that account.
+- Added:
+    app.MapRazorPages();
+- Added endpoint mapping:
+    app.MapRazorPages();
+
+
+3. PartB_AspNetCoreMVC\NCCS_Lab_MVC\NCCS_Lab_MVC.csproj
+---------------------------------------------------------
+
+BEFORE:
+- Microsoft.AspNetCore.Identity.EntityFrameworkCore was referenced.
+- The Identity UI package needed by AddDefaultIdentity was missing.
+- Relevant package references:
+    <PackageReference
+        Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore"
+        Version="8.0.8" />
+
+AFTER:
+- Added:
+    Microsoft.AspNetCore.Identity.UI Version 8.0.8
+- Added package reference:
+    <PackageReference
+        Include="Microsoft.AspNetCore.Identity.UI"
+        Version="8.0.8" />
+- The project can compile the Identity setup used by Q19.
+
+
+4. PartB_AspNetCoreMVC\NCCS_Lab_MVC\Views\Employee\Register.cshtml
+------------------------------------------------------------------
+
+BEFORE:
+- The view referenced "_ValidationScriptsPartial".
+- That partial file did not exist, causing a runtime view error for Q13/Q14.
+- Existing view reference:
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+AFTER:
+- The existing view was not changed.
+- A matching validation partial was added in the Shared views folder.
+
+
+5. PartB_AspNetCoreMVC\NCCS_Lab_MVC\Views\Shared\_ValidationScriptsPartial.cshtml
+------------------------------------------------------------------------------------
+
+BEFORE:
+- File did not exist.
+
+AFTER:
+- Added jQuery.
+- Added jQuery Validate.
+- Added jQuery Unobtrusive Validation.
+- Added code:
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+- Q13/Q14 client-side validation can now load correctly.
+
+
+6. PartB_AspNetCoreMVC\NCCS_Lab_MVC\Views\Shared\_LoginPartial.cshtml
+----------------------------------------------------------------------
+
+BEFORE:
+- File did not exist.
+- The default ASP.NET Core Identity UI returned a runtime error because the layout
+  expected "_LoginPartial".
+
+AFTER:
+- Added login/register links for signed-out users.
+- Added account and logout links for signed-in users.
+- Added code pattern:
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a asp-area="Identity" asp-page="/Account/Manage/Index">Account</a>
+        <form asp-area="Identity" asp-page="/Account/Logout" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    }
+    else
+    {
+        <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+    }
+- Q19 Identity pages can now render successfully.
+
+
+7. PartB_AspNetCoreMVC\Q11_ProjectStructure
+--------------------------------------------
+
+BEFORE:
+- This standalone Q11 demo project did not exist.
+
+AFTER:
+- Added a separate Q11 MVC demonstration project containing:
+  Program.cs
+  Controllers\HomeController.cs
+  Views\Home\Index.cshtml
+  Views\_ViewImports.cshtml
+  Views\_ViewStart.cshtml
+  Models\.gitkeep
+  wwwroot\.gitkeep
+  Q11_ProjectStructure.csproj
+  README.md
+- The demo shows MVC structure, service registration, routing, terminal startup,
+  and localhost browser output.
+
+
+Unchanged lab source code
+=========================
+
+The source code of Q01-Q03 and Q05-Q10 was not intentionally modified.
+The original Q13, Q14, Q17, Q19, and Q20 controller/model source files were also
+not rewritten; supporting project, startup, database, and view files were fixed
+around them.

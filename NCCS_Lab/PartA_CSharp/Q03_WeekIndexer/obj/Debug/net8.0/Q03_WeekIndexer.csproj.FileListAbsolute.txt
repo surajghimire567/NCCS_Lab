@@ -1,0 +1,14 @@
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q03_WeekIndexer\bin\Debug\net8.0\Q03_WeekIndexer.exe
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q03_WeekIndexer\bin\Debug\net8.0\Q03_WeekIndexer.deps.json
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q03_WeekIndexer\bin\Debug\net8.0\Q03_WeekIndexer.runtimeconfig.json
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q03_WeekIndexer\bin\Debug\net8.0\Q03_WeekIndexer.dll
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q03_WeekIndexer\bin\Debug\net8.0\Q03_WeekIndexer.pdb
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q03_WeekIndexer\obj\Debug\net8.0\Q03_WeekIndexer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q03_WeekIndexer\obj\Debug\net8.0\Q03_WeekIndexer.AssemblyInfoInputs.cache
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q03_WeekIndexer\obj\Debug\net8.0\Q03_WeekIndexer.AssemblyInfo.cs
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q03_WeekIndexer\obj\Debug\net8.0\Q03_WeekIndexer.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q03_WeekIndexer\obj\Debug\net8.0\Q03_WeekIndexer.dll
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q03_WeekIndexer\obj\Debug\net8.0\refint\Q03_WeekIndexer.dll
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q03_WeekIndexer\obj\Debug\net8.0\Q03_WeekIndexer.pdb
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q03_WeekIndexer\obj\Debug\net8.0\Q03_WeekIndexer.genruntimeconfig.cache
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartA_CSharp\Q03_WeekIndexer\obj\Debug\net8.0\ref\Q03_WeekIndexer.dll
