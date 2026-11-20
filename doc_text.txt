@@ -1,0 +1,1472 @@
+0: NET Centric Computing (CSC367)
+1: Lab Report – How to Run the Programs in VS Code
+2: A. One-time Setup
+3: Install the .NET 8 SDK (or newer) from https://dotnet.microsoft.com/download and check it with:  dotnet --version
+4: Install VS Code and the extensions "C# Dev Kit" (Microsoft). Optional: "REST Client" for testing Lab 16.
+5: Open VS Code > Terminal > New Terminal (Ctrl + `). Run all commands below in that terminal.
+6: Always create the project with the exact name shown (Lab1, Lab12 …) so the namespaces in the code match.
+7: B. Console Programs (Labs 1–10, 17, 20)
+8: mkdir Labs
+9: cd Labs
+10: dotnet new console -n Lab1      # create project
+11: cd Lab1
+12: code . -r                       # open the folder in VS Code
+13: # Replace ALL code in Program.cs with the Lab 1 source code, save (Ctrl+S)
+14: dotnet run                       # compile and run
+15: cd ..
+17: C. ASP.NET Core MVC / Web API Programs (Labs 11–16, 18, 19)
+18: dotnet new mvc -n Lab12         # create MVC project
+19: cd Lab12
+20: code . -r
+21: # Create the files shown in the lab (Models/..., Controllers/..., Views/...)
+22: dotnet run                       # note URL: "Now listening on: http://localhost:5xxx"
+23: # Open that URL + the path given in the table below. Stop with Ctrl+C
+25: D. Lab-wise Commands
+27: Notes
+28: Lab 16: delete WeatherForecastController.cs / WeatherForecast.cs if generated, and replace Program.cs with the given code.
+29: Lab 19: replace the generated Program.cs; the database, roles and admin user (admin@nccs.edu.np / Admin@123) are created on first run.
+30: If a package version error appears, run the add package command without --version. To stop a running web app press Ctrl + C.
+31: Lab 1
+32: Class with Auto-Implemented Properties and Constructor
+33: Question: Write a C# console program that defines a class Student with properties Name, Roll, and Marks using auto-implemented properties, and demonstrate object creation along with a constructor that initializes all three fields.
+34: Source Code:
+35: using System;
+37: // Q1: Class Student with auto-implemented properties + constructor
+38: class Student
+39: {
+40: // Auto-implemented properties
+41: public string Name { get; set; }
+42: public int Roll { get; set; }
+43: public double Marks { get; set; }
+45: // Constructor initializing all three fields
+46: public Student(string name, int roll, double marks)
+47: {
+48: Name = name;
+49: Roll = roll;
+50: Marks = marks;
+51: }
+53: public void Display()
+54: {
+55: Console.WriteLine($"Name: {Name}, Roll: {Roll}, Marks: {Marks}");
+56: }
+57: }
+59: class Program
+60: {
+61: static void Main()
+62: {
+63: Student s1 = new Student("Suraj", 1, 85.5);
+64: Student s2 = new Student("Hari", 2, 72.0);
+66: s1.Display();
+67: s2.Display();
+68: }
+69: }
+71: Output Screenshot:
+73: Lab 2
+74: Runtime Polymorphism using Virtual and Override
+75: Question: Create a base class Shape with a virtual method Area() and derive classes Circle and Rectangle that override Area(). Demonstrate runtime polymorphism by calling Area() through a base class reference.
+76: Source Code:
+77: using System;
+79: class Shape
+80: {
+81: public virtual double Area()
+82: {
+83: return 0;
+84: }
+85: }
+87: class Circle : Shape
+88: {
+89: double radius;
+90: public Circle(double r) { radius = r; }
+91: public override double Area()
+92: {
+93: return 3.14159 * radius * radius;
+94: }
+95: }
+97: class Rectangle : Shape
+98: {
+99: double length, width;
+100: public Rectangle(double l, double w) { length = l; width = w; }
+101: public override double Area()
+102: {
+103: return length * width;
+104: }
+105: }
+107: class Program
+108: {
+109: static void Main()
+110: {
+111: Circle c = new Circle(5);
+112: Rectangle r = new Rectangle(4, 6);
+114: Shape shapeRef;
+116: shapeRef = c;
+117: Console.WriteLine("Area of Circle: " + shapeRef.Area());
+119: shapeRef = r;
+120: Console.WriteLine("Area of Rectangle: " + shapeRef.Area());
+121: }
+122: }
+124: Output Screenshot:
+126: Lab 3
+127: Indexer
+128: Question: Write a program using an indexer in a class Week that allows accessing day names using an integer index (e.g., week[0] returns "Sunday").
+129: Source Code:
+130: using System;
+132: class Week
+133: {
+134: private string[] days = { "Sunday", "Monday", "Tuesday", "Wednesday",
+135: "Thursday", "Friday", "Saturday" };
+137: // Indexer
+138: public string this[int index]
+139: {
+140: get
+141: {
+142: if (index < 0 || index >= days.Length)
+143: return "Invalid Index";
+144: return days[index];
+145: }
+146: set
+147: {
+148: if (index >= 0 && index < days.Length)
+149: days[index] = value;
+150: }
+151: }
+152: }
+154: class Program
+155: {
+156: static void Main()
+157: {
+158: Week week = new Week();
+160: Console.WriteLine(week[0]); // Sunday
+161: Console.WriteLine(week[3]); // Wednesday
+163: week[6] = "Holiday";
+164: Console.WriteLine(week[6]); // Holiday
+165: }
+166: }
+168: Output Screenshot:
+170: Lab 4
+171: Generic Class Stack<T>
+172: Question: Implement a generic class Stack<T> with Push, Pop, and Peek methods, and demonstrate its use with both int and string data types.
+173: Source Code:
+174: using System;
+176: class MyStack<T>
+177: {
+178: private T[] items = new T[100];
+179: private int top = -1;
+181: public void Push(T item)
+182: {
+183: if (top == items.Length - 1)
+184: {
+185: Console.WriteLine("Stack Overflow");
+186: return;
+187: }
+188: items[++top] = item;
+189: }
+191: public T Pop()
+192: {
+193: if (top == -1)
+194: {
+195: Console.WriteLine("Stack Underflow");
+196: return default(T)!;
+197: }
+198: return items[top--];
+199: }
+201: public T Peek()
+202: {
+203: if (top == -1)
+204: {
+205: Console.WriteLine("Stack is empty");
+206: return default(T)!;
+207: }
+208: return items[top];
+209: }
+210: }
+212: class Program
+213: {
+214: static void Main()
+215: {
+216: MyStack<int> intStack = new MyStack<int>();
+217: intStack.Push(10);
+218: intStack.Push(20);
+219: intStack.Push(30);
+220: Console.WriteLine("Peek: " + intStack.Peek());
+221: Console.WriteLine("Pop: " + intStack.Pop());
+223: MyStack<string> strStack = new MyStack<string>();
+224: strStack.Push("Nepal");
+225: strStack.Push("Kathmandu");
+226: Console.WriteLine("Peek: " + strStack.Peek());
+227: Console.WriteLine("Pop: " + strStack.Pop());
+228: }
+229: }
+231: Output Screenshot:
+233: Lab 5
+234: Abstract Class and Abstract Method
+235: Question: Write a C# program demonstrating the use of an abstract class Employee with an abstract method CalculateSalary(), implemented differently by two derived classes Manager and Clerk.
+236: Source Code:
+237: using System;
+239: abstract class Employee
+240: {
+241: public string Name;
+242: public Employee(string name) { Name = name; }
+244: public abstract double CalculateSalary();
+246: public void DisplaySalary()
+247: {
+248: Console.WriteLine($"{Name}'s Salary: {CalculateSalary()}");
+249: }
+250: }
+252: class Manager : Employee
+253: {
+254: private double baseSalary = 50000;
+255: private double bonus = 10000;
+256: public Manager(string name) : base(name) { }
+257: public override double CalculateSalary() => baseSalary + bonus;
+258: }
+260: class Clerk : Employee
+261: {
+262: private double baseSalary = 25000;
+263: private double allowance = 3000;
+264: public Clerk(string name) : base(name) { }
+265: public override double CalculateSalary() => baseSalary + allowance;
+266: }
+268: class Program
+269: {
+270: static void Main()
+271: {
+272: Employee e1 = new Manager("Ram");
+273: Employee e2 = new Clerk("Sita");
+275: e1.DisplaySalary();
+276: e2.DisplaySalary();
+277: }
+278: }
+280: Output Screenshot:
+282: Lab 6
+283: Interface and Polymorphism with List<IPayable>
+284: Question: Write a program that defines an interface IPayable with a method Pay(), implement it in two classes Invoice and Salary, and call the method polymorphically using a List<IPayable>.
+285: Source Code:
+286: using System;
+287: using System.Collections.Generic;
+289: interface IPayable
+290: {
+291: void Pay();
+292: }
+294: class Invoice : IPayable
+295: {
+296: public double Amount;
+297: public Invoice(double amount) { Amount = amount; }
+298: public void Pay()
+299: {
+300: Console.WriteLine($"Invoice paid: Rs. {Amount}");
+301: }
+302: }
+304: class Salary : IPayable
+305: {
+306: public string EmployeeName;
+307: public double Amount;
+308: public Salary(string name, double amount)
+309: {
+310: EmployeeName = name;
+311: Amount = amount;
+312: }
+313: public void Pay()
+314: {
+315: Console.WriteLine($"Salary paid to {EmployeeName}: Rs. {Amount}");
+316: }
+317: }
+319: class Program
+320: {
+321: static void Main()
+322: {
+323: List<IPayable> payables = new List<IPayable>
+324: {
+325: new Invoice(1500),
+326: new Salary("Gita", 30000)
+327: };
+329: foreach (IPayable p in payables)
+330: {
+331: p.Pay(); // polymorphic call
+332: }
+333: }
+334: }
+336: Output Screenshot:
+338: Lab 7
+339: Delegates and Events
+340: Question: Demonstrate the use of delegates and events in C# by creating a simple event that notifies subscribers when a temperature value crosses a threshold.
+341: Source Code:
+342: using System;
+344: // Delegate declaration
+345: public delegate void ThresholdCrossedHandler(double temperature);
+347: class TemperatureSensor
+348: {
+349: public event ThresholdCrossedHandler? ThresholdCrossed;
+350: private double threshold;
+352: public TemperatureSensor(double threshold)
+353: {
+354: this.threshold = threshold;
+355: }
+357: public void SetTemperature(double temp)
+358: {
+359: Console.WriteLine($"Current Temperature: {temp}");
+360: if (temp > threshold)
+361: {
+362: // Raise the event -> notifies all subscribers
+363: ThresholdCrossed?.Invoke(temp);
+364: }
+365: }
+366: }
+368: class Program
+369: {
+370: // Event handler methods (subscribers)
+371: static void Alarm(double temp)
+372: {
+373: Console.WriteLine($"[ALARM] Threshold crossed! Temp = {temp}");
+374: }
+376: static void LogToFile(double temp)
+377: {
+378: Console.WriteLine($"[LOG] Recording high temperature: {temp}");
+379: }
+381: static void Main()
+382: {
+383: TemperatureSensor sensor = new TemperatureSensor(threshold: 40);
+385: // Subscribing to the event
+386: sensor.ThresholdCrossed += Alarm;
+387: sensor.ThresholdCrossed += LogToFile;
+389: sensor.SetTemperature(35);
+390: sensor.SetTemperature(45); // triggers both subscribers
+391: }
+392: }
+394: Output Screenshot:
+396: Lab 8
+397: LINQ and Lambda Expressions
+398: Question: Write a program using LINQ and lambda expressions to filter a list of integers and return only even numbers greater than 10, sorted in descending order.
+399: Source Code:
+400: using System;
+401: using System.Linq;
+402: using System.Collections.Generic;
+404: class Program
+405: {
+406: static void Main()
+407: {
+408: List<int> numbers = new List<int> { 3, 8, 11, 14, 5, 20, 7, 16, 9, 24 };
+410: // LINQ query with lambda: even numbers > 10, sorted descending
+411: var result = numbers
+412: .Where(n => n % 2 == 0 && n > 10)
+413: .OrderByDescending(n => n)
+414: .ToList();
+416: Console.WriteLine("Even numbers greater than 10 (descending):");
+417: foreach (var n in result)
+418: Console.WriteLine(n);
+419: }
+420: }
+422: Output Screenshot:
+424: Lab 9
+425: File I/O with StreamReader / StreamWriter and Exception Handling
+426: Question: Write a C# program that reads data from a text file and writes processed output to another file using File I/O classes (StreamReader/StreamWriter), handling exceptions using try-catch-finally.
+427: Source Code:
+428: using System;
+429: using System.IO;
+431: class Program
+432: {
+433: static void Main()
+434: {
+435: string inputFile = "input.txt";
+436: string outputFile = "output.txt";
+438: // Create a sample input file first (so the program is runnable standalone)
+439: File.WriteAllText(inputFile, "hello\nworld\ncsharp\nfile io demo");
+441: StreamReader? reader = null;
+442: StreamWriter? writer = null;
+444: try
+445: {
+446: reader = new StreamReader(inputFile);
+447: writer = new StreamWriter(outputFile);
+449: string? line;
+450: while ((line = reader.ReadLine()) != null)
+451: {
+452: // Processing: convert each line to uppercase
+453: string processed = line.ToUpper();
+454: writer.WriteLine(processed);
+455: }
+457: Console.WriteLine("File processed successfully. Check output.txt");
+458: }
+459: catch (FileNotFoundException ex)
+460: {
+461: Console.WriteLine("Error: Input file not found. " + ex.Message);
+462: }
+463: catch (IOException ex)
+464: {
+465: Console.WriteLine("I/O Error: " + ex.Message);
+466: }
+467: finally
+468: {
+469: reader?.Close();
+470: writer?.Close();
+471: Console.WriteLine("Streams closed (finally block executed).");
+472: }
+473: }
+474: }
+476: Output Screenshot:
+478: Lab 10
+479: Asynchronous Programming with async/await
+480: Question: Write an asynchronous C# program using async/await that simulates downloading two files concurrently and prints a message once both downloads are complete.
+481: Source Code:
+482: using System;
+483: using System.Threading.Tasks;
+485: class Program
+486: {
+487: // Simulated async download method
+488: static async Task DownloadFileAsync(string fileName, int seconds)
+489: {
+490: Console.WriteLine($"Started downloading {fileName}...");
+491: await Task.Delay(seconds * 1000); // simulate network delay
+492: Console.WriteLine($"Finished downloading {fileName}.");
+493: }
+495: static async Task Main()
+496: {
+497: Console.WriteLine("Download started at: " + DateTime.Now.ToLongTimeString());
+499: // Start both downloads concurrently
+500: Task file1 = DownloadFileAsync("report.pdf", 3);
+501: Task file2 = DownloadFileAsync("photos.zip", 2);
+503: // Wait for both to complete concurrently
+504: await Task.WhenAll(file1, file2);
+506: Console.WriteLine("Both downloads are complete!");
+507: Console.WriteLine("Finished at: " + DateTime.Now.ToLongTimeString());
+508: }
+509: }
+511: Output Screenshot:
+513: Lab 11
+514: Creating an ASP.NET Core MVC Project using .NET CLI
+515: Question: Create a new ASP.NET Core MVC project using the .NET CLI (dotnet new mvc) and explain, with screenshots/output, the purpose of the Program.cs, Startup configuration, and the default project folder structure.
+516: Source Code:
+517: Terminal Commands
+518: dotnet --version
+519: cd Lab11
+520: code .
+521: dotnet build
+522: dotnet run
+524: Program.cs (Q11_ProjectStructure)
+525: var builder = WebApplication.CreateBuilder(args);
+527: // Service registration: enable MVC controllers and Razor views.
+528: builder.Services.AddControllersWithViews();
+530: var app = builder.Build();
+532: // HTTP request pipeline.
+533: if (!app.Environment.IsDevelopment())
+534: {
+535: app.UseExceptionHandler("/Home/Error");
+536: app.UseHsts();
+537: }
+539: app.UseHttpsRedirection();
+540: app.UseStaticFiles();
+541: app.UseRouting();
+543: // Conventional MVC routing: /Controller/Action/{id?}
+544: app.MapControllerRoute(
+545: name: "default",
+546: pattern: "{controller=Home}/{action=Index}/{id?}");
+548: app.Run();
+550: Equivalent Startup.cs (older style, .NET Core 3.1 / .NET 5)
+551: public class Startup
+552: {
+553: public void ConfigureServices(IServiceCollection services)
+554: {
+555: services.AddControllersWithViews();
+556: }
+558: public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+559: {
+560: if (env.IsDevelopment())
+561: app.UseDeveloperExceptionPage();
+562: else
+563: app.UseExceptionHandler("/Home/Error");
+565: app.UseStaticFiles();
+566: app.UseRouting();
+567: app.UseAuthorization();
+568: app.UseEndpoints(endpoints =>
+569: {
+570: endpoints.MapControllerRoute(
+571: name: "default",
+572: pattern: "{controller=Home}/{action=Index}/{id?}");
+573: });
+574: }
+575: }
+577: Default Folder Structure
+578: Lab11/
+579: |-- Controllers/
+580: |   `-- HomeController.cs
+581: |-- Models/
+582: |   `-- ErrorViewModel.cs
+583: |-- Views/
+584: |   |-- Home/
+585: |   |   |-- Index.cshtml
+586: |   |   `-- Privacy.cshtml
+587: |   |-- Shared/
+588: |   |   |-- _Layout.cshtml
+589: |   |   |-- _ValidationScriptsPartial.cshtml
+590: |   |   `-- Error.cshtml
+591: |   |-- _ViewImports.cshtml
+592: |   `-- _ViewStart.cshtml
+593: |-- wwwroot/
+594: |   |-- css/  js/  lib/
+595: |   `-- favicon.ico
+596: |-- Properties/
+597: |   `-- launchSettings.json
+598: |-- appsettings.json
+599: |-- appsettings.Development.json
+600: |-- Program.cs
+601: `-- Lab11.csproj
+603: Sample Output of dotnet run
+604: Building...
+605: info: Microsoft.Hosting.Lifetime[14]
+606: Now listening on: http://localhost:5123
+607: info: Microsoft.Hosting.Lifetime[0]
+608: Application started. Press Ctrl+C to shut down.
+609: info: Microsoft.Hosting.Lifetime[0]
+610: Hosting environment: Development
+611: info: Microsoft.Hosting.Lifetime[0]
+612: Content root path: D:\Labs\Lab11
+614: Purpose of Program.cs:
+615: Program.cs is the entry point of the application. In .NET 6 and later it uses top-level statements and the minimal hosting model.
+616: WebApplication.CreateBuilder(args) creates the host, loads configuration (appsettings.json, environment variables), logging and the dependency-injection container.
+617: builder.Services.AddControllersWithViews() registers MVC services (controllers, Razor views, model binding, validation).
+618: builder.Build() creates the app; the Use... calls add middleware to the HTTP request pipeline (exception handling, HTTPS redirection, static files, routing, authorization).
+619: MapControllerRoute defines the default route {controller=Home}/{action=Index}/{id?}, and app.Run() starts the Kestrel web server.
+620: Startup Configuration:
+621: In .NET Core 3.1 / .NET 5 the configuration lived in a separate Startup class with two methods: ConfigureServices() to register services and Configure() to build the middleware pipeline.
+622: From .NET 6 onwards both parts are merged into Program.cs: code before builder.Build() is the old ConfigureServices, and code after it is the old Configure method.
+623: Default Folder Structure:
+624: Controllers - classes that handle requests and return responses (HomeController).
+625: Models - classes that represent data and business logic (ErrorViewModel).
+626: Views - Razor (.cshtml) files; Shared contains the _Layout master page and partial views; _ViewStart sets the layout; _ViewImports holds common using statements and Tag Helpers.
+627: wwwroot - static files (CSS, JavaScript, images, Bootstrap and jQuery libraries).
+628: Properties/launchSettings.json - port numbers and environment used when running locally.
+629: appsettings.json - application configuration such as connection strings and logging.
+630: Lab11.csproj - project file containing target framework and NuGet package references.
+633: Screenshots:
+635: (1) the dotnet new mvc command output
+641: (2) the folder structure in VS Code Explorer
+656: (3) dotnet run output
+664: (4) the Home page in the browser.
+665: Lab 12
+666: Controller, Action and Razor View with foreach
+667: Question: Create a Controller named ProductController with an Index action that returns a list of products to a Razor view, and display the list using a foreach loop in the view.
+668: Source Code:
+669: Models/Product.cs
+670: namespace NCCS_Lab_MVC.Models
+671: {
+672: // Q12/Q16: simple Product model used by MVC Controller and Web API Controller
+673: public class Product
+674: {
+675: public int Id { get; set; }
+676: public string Name { get; set; } = string.Empty;
+677: public decimal Price { get; set; }
+678: }
+679: }
+681: Controllers/ProductController.cs
+682: using Microsoft.AspNetCore.Mvc;
+683: using NCCS_Lab_MVC.Models;
+685: namespace NCCS_Lab_MVC.Controllers
+686: {
+687: // Q12: Controller returning a list of products to a Razor view
+688: public class ProductController : Controller
+689: {
+690: public IActionResult Index()
+691: {
+692: List<Product> products = new List<Product>
+693: {
+694: new Product { Id = 1, Name = "Keyboard", Price = 1500 },
+695: new Product { Id = 2, Name = "Mouse", Price = 800 },
+696: new Product { Id = 3, Name = "Monitor", Price = 12000 }
+697: };
+699: return View(products); // passes model to Views/Product/Index.cshtml
+700: }
+701: }
+702: }
+704: Views/Product/Index.cshtml
+705: @model List<NCCS_Lab_MVC.Models.Product>
+706: @{
+707: ViewData["Title"] = "Product List";
+708: }
+710: <h2>Product List</h2>
+712: <table class="table">
+713: <thead>
+714: <tr><th>Id</th><th>Name</th><th>Price</th></tr>
+715: </thead>
+716: <tbody>
+717: @foreach (var product in Model)
+718: {
+719: <tr>
+720: <td>@product.Id</td>
+721: <td>@product.Name</td>
+722: <td>@product.Price</td>
+723: </tr>
+724: }
+725: </tbody>
+726: </table>
+728: Output Screenshot:
+730: Lab 13
+731: Razor Syntax and Built-in Tag Helpers (Registration Form)
+732: Question: Demonstrate the use of Razor syntax and at least two built-in Tag Helpers (e.g., asp-for, asp-action) in a view that displays and submits a simple registration form.
+733: Source Code:
+734: Views/Employee/Register.cshtml
+735: @model NCCS_Lab_MVC.Models.Employee
+736: @{
+737: ViewData["Title"] = "Employee Registration";
+738: }
+740: <h2>Employee Registration</h2>
+742: @if (TempData["Message"] != null)
+743: {
+744: <div class="alert alert-success">@TempData["Message"]</div>
+745: }
+747: <form asp-action="Register" method="post">
+748: <!-- asp-validation-summary Tag Helper: shows all validation errors -->
+749: <div asp-validation-summary="All" class="text-danger"></div>
+751: <div class="form-group">
+752: <label asp-for="Name"></label>
+753: <!-- asp-for Tag Helper: binds input to model property + enables client-side validation -->
+754: <input asp-for="Name" class="form-control" />
+755: <span asp-validation-for="Name" class="text-danger"></span>
+756: </div>
+758: <div class="form-group">
+759: <label asp-for="Age"></label>
+760: <input asp-for="Age" class="form-control" />
+761: <span asp-validation-for="Age" class="text-danger"></span>
+762: </div>
+764: <div class="form-group">
+765: <label asp-for="Email"></label>
+766: <input asp-for="Email" class="form-control" />
+767: <span asp-validation-for="Email" class="text-danger"></span>
+768: </div>
+770: <!-- asp-action Tag Helper: generates form action URL pointing to Register action -->
+771: <button type="submit" class="btn btn-primary">Register</button>
+772: </form>
+774: @section Scripts {
+775: <!-- jQuery unobtrusive validation scripts enable CLIENT-SIDE validation -->
+776: <partial name="_ValidationScriptsPartial" />
+777: }
+779: Output Screenshot:
+781: Lab 14
+782: Model Validation with Data Annotations
+783: Question: Create a Model class Employee with data annotations for validation (e.g., [Required], [Range]) and demonstrate client-side and server-side model validation in an ASP.NET Core MVC form.
+784: Source Code:
+785: Models/Employee.cs
+786: using System.ComponentModel.DataAnnotations;
+788: namespace NCCS_Lab_MVC.Models
+789: {
+790: // Q14: Model with Data Annotations for validation
+791: public class Employee
+792: {
+793: public int Id { get; set; }
+795: [Required(ErrorMessage = "Name is required")]
+796: [StringLength(50, ErrorMessage = "Name cannot exceed 50 characters")]
+797: public string Name { get; set; } = string.Empty;
+799: [Required(ErrorMessage = "Age is required")]
+800: [Range(18, 60, ErrorMessage = "Age must be between 18 and 60")]
+801: public int Age { get; set; }
+803: [Required(ErrorMessage = "Email is required")]
+804: [EmailAddress(ErrorMessage = "Invalid email format")]
+805: public string Email { get; set; } = string.Empty;
+806: }
+807: }
+809: Controllers/EmployeeController.cs
+810: using Microsoft.AspNetCore.Mvc;
+811: using NCCS_Lab_MVC.Models;
+813: namespace NCCS_Lab_MVC.Controllers
+814: {
+815: public class EmployeeController : Controller
+816: {
+817: // Q13/Q14: GET - display registration form
+818: [HttpGet]
+819: public IActionResult Register()
+820: {
+821: return View(new Employee());
+822: }
+824: // Q13/Q14: POST - submit form, validated via Data Annotations
+825: [HttpPost]
+826: public IActionResult Register(Employee employee)
+827: {
+828: // ModelState.IsValid runs SERVER-SIDE validation based on
+829: // the [Required]/[Range]/[EmailAddress] attributes on Employee.
+830: if (ModelState.IsValid)
+831: {
+832: TempData["Message"] = $"Employee {employee.Name} registered successfully!";
+833: return RedirectToAction("Register");
+834: }
+835: // Invalid -> redisplay form with validation messages
+836: return View(employee);
+837: }
+839: // Q15: Custom route maps /employee/details/5 -> Details action, id = 5
+840: // Route attribute declared here; general pattern also configured in Program.cs
+841: [HttpGet]
+842: [Route("employee/details/{id:int}")]
+843: public IActionResult Details(int id)
+844: {
+845: var employee = new Employee { Id = id, Name = "Sample Employee", Age = 25, Email = "sample@test.com" };
+846: return View(employee);
+847: }
+848: }
+849: }
+851: How to test:
+852: Client-side: leave fields empty or type Age = 10 and click Save. Errors appear immediately without the page reloading (jQuery Unobtrusive Validation).
+853: Server-side: disable JavaScript in the browser (or type the name 'admin'), then submit. The form is posted, ModelState.IsValid becomes false in the controller, and the same view is returned with error messages.
+854: Output Screenshot:
+856: Lab 15
+857: Custom URL Routing
+858: Question: Configure custom URL routing in an ASP.NET Core MVC application so that a URL like /employee/details/5 maps to the Details action of EmployeeController with id as a parameter.
+859: Source Code:
+860: Program.cs
+861: using Microsoft.AspNetCore.Identity;
+862: using Microsoft.EntityFrameworkCore;
+863: using NCCS_Lab_MVC.Data;
+865: // Q11: WebApplication.CreateBuilder replaces the old Startup.cs (ConfigureServices + Configure).
+866: // Everything — services (DI container registrations) and the HTTP pipeline — lives in this one file.
+867: var builder = WebApplication.CreateBuilder(args);
+869: // ---- Register services (equivalent of old Startup.ConfigureServices) ----
+871: // MVC: Controllers + Views
+872: builder.Services.AddControllersWithViews();
+873: builder.Services.AddRazorPages();
+875: // Q17: EF Core DbContext using SQLite (file-based, needs no external DB server)
+876: builder.Services.AddDbContext<AppDbContext>(options =>
+877: options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+879: // Q19: ASP.NET Core Identity (authentication + role-based authorization)
+880: builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+881: {
+882: options.SignIn.RequireConfirmedAccount = false;
+883: })
+884: .AddRoles<IdentityRole>()
+885: .AddEntityFrameworkStores<AppDbContext>();
+887: // Q18: Session state (server-side state management on stateless HTTP)
+888: builder.Services.AddDistributedMemoryCache();
+889: builder.Services.AddSession(options =>
+890: {
+891: options.IdleTimeout = TimeSpan.FromMinutes(30);
+892: options.Cookie.HttpOnly = true;
+893: });
+895: var app = builder.Build();
+897: // Create the SQLite schema for the lab demo when the database is new.
+898: using (var scope = app.Services.CreateScope())
+899: {
+900: var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+901: db.Database.EnsureCreated();
+903: db.Database.ExecuteSqlRaw("""
+904: CREATE TABLE IF NOT EXISTS Users (
+905: Id INTEGER PRIMARY KEY AUTOINCREMENT,
+906: Username TEXT NOT NULL UNIQUE
+907: );
+908: INSERT OR IGNORE INTO Users (Username) VALUES ('alice');
+909: INSERT OR IGNORE INTO Users (Username) VALUES ('bob');
+910: """);
+912: var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+913: if (!await roleManager.RoleExistsAsync("Admin"))
+914: {
+915: await roleManager.CreateAsync(new IdentityRole("Admin"));
+916: }
+918: var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+919: const string adminEmail = "admin@localhost";
+920: var admin = await userManager.FindByEmailAsync(adminEmail);
+921: if (admin == null)
+922: {
+923: admin = new IdentityUser
+924: {
+925: UserName = adminEmail,
+926: Email = adminEmail,
+927: EmailConfirmed = true
+928: };
+929: await userManager.CreateAsync(admin, "Admin123!");
+930: }
+932: if (!await userManager.IsInRoleAsync(admin, "Admin"))
+933: {
+934: await userManager.AddToRoleAsync(admin, "Admin");
+935: }
+936: }
+938: // ---- HTTP request pipeline (equivalent of old Startup.Configure) ----
+940: if (!app.Environment.IsDevelopment())
+941: {
+942: app.UseExceptionHandler("/Home/Error");
+943: app.UseHsts();
+944: }
+946: app.UseHttpsRedirection();
+947: app.UseStaticFiles();
+949: app.UseRouting();
+951: app.UseSession();          // must come after UseRouting, before UseAuthorization
+952: app.UseAuthentication();   // Q19: who is the user?
+953: app.UseAuthorization();    // Q19: what are they allowed to do?
+955: // Q15: Custom route — matches BEFORE the default convention route,
+956: // so /employee/details/5 -> EmployeeController.Details(id = 5)
+957: app.MapControllerRoute(
+958: name: "employeeDetails",
+959: pattern: "employee/details/{id:int}",
+960: defaults: new { controller = "Employee", action = "Details" });
+962: // Default conventional route: /{Controller}/{Action}/{id?}
+963: app.MapControllerRoute(
+964: name: "default",
+965: pattern: "{controller=Home}/{action=Index}/{id?}");
+967: app.MapRazorPages();
+969: // Q16/Q17/Q20: attribute-routed API controllers (api/[controller]/...)
+970: app.MapControllers();
+972: app.Run();
+974: Models/Employee.cs
+975: using System.ComponentModel.DataAnnotations;
+977: namespace NCCS_Lab_MVC.Models
+978: {
+979: // Q14: Model with Data Annotations for validation
+980: public class Employee
+981: {
+982: public int Id { get; set; }
+984: [Required(ErrorMessage = "Name is required")]
+985: [StringLength(50, ErrorMessage = "Name cannot exceed 50 characters")]
+986: public string Name { get; set; } = string.Empty;
+988: [Required(ErrorMessage = "Age is required")]
+989: [Range(18, 60, ErrorMessage = "Age must be between 18 and 60")]
+990: public int Age { get; set; }
+992: [Required(ErrorMessage = "Email is required")]
+993: [EmailAddress(ErrorMessage = "Invalid email format")]
+994: public string Email { get; set; } = string.Empty;
+995: }
+996: }
+998: Controllers/EmployeeController.cs
+999: using Microsoft.AspNetCore.Mvc;
+1000: using NCCS_Lab_MVC.Models;
+1002: namespace NCCS_Lab_MVC.Controllers
+1003: {
+1004: public class EmployeeController : Controller
+1005: {
+1006: // Q13/Q14: GET - display registration form
+1007: [HttpGet]
+1008: public IActionResult Register()
+1009: {
+1010: return View(new Employee());
+1011: }
+1013: // Q13/Q14: POST - submit form, validated via Data Annotations
+1014: [HttpPost]
+1015: public IActionResult Register(Employee employee)
+1016: {
+1017: // ModelState.IsValid runs SERVER-SIDE validation based on
+1018: // the [Required]/[Range]/[EmailAddress] attributes on Employee.
+1019: if (ModelState.IsValid)
+1020: {
+1021: TempData["Message"] = $"Employee {employee.Name} registered successfully!";
+1022: return RedirectToAction("Register");
+1023: }
+1024: // Invalid -> redisplay form with validation messages
+1025: return View(employee);
+1026: }
+1028: // Q15: Custom route maps /employee/details/5 -> Details action, id = 5
+1029: // Route attribute declared here; general pattern also configured in Program.cs
+1030: [HttpGet]
+1031: [Route("employee/details/{id:int}")]
+1032: public IActionResult Details(int id)
+1033: {
+1034: var employee = new Employee { Id = id, Name = "Sample Employee", Age = 25, Email = "sample@test.com" };
+1035: return View(employee);
+1036: }
+1037: }
+1038: }
+1040: Views/Employee/Details.cshtml
+1041: @model NCCS_Lab_MVC.Models.Employee
+1042: @{
+1043: ViewData["Title"] = "Employee Details";
+1044: }
+1046: <h2>Employee Details</h2>
+1047: <!-- Reached via custom route: /employee/details/5 -->
+1048: <p><strong>Id:</strong> @Model.Id</p>
+1049: <p><strong>Name:</strong> @Model.Name</p>
+1050: <p><strong>Age:</strong> @Model.Age</p>
+1051: <p><strong>Email:</strong> @Model.Email</p>
+1053: How to test:
+1054: Run the app and open /employee/details/5 (shows Hari), /employee/details/1 (shows Ram), /employee/details/9 (404 Not Found) and /staff (employee list).
+1055: Output Screenshot:
+1057: Lab 16
+1058: Web API Controller with GET and POST (JSON)
+1059: Question: Create a Web API Controller that exposes GET and POST endpoints returning data in JSON format, and test the endpoints using Postman or a browser.
+1060: Source Code:
+1061: Program.cs
+1062: using Microsoft.AspNetCore.Identity;
+1063: using Microsoft.EntityFrameworkCore;
+1064: using NCCS_Lab_MVC.Data;
+1066: // Q11: WebApplication.CreateBuilder replaces the old Startup.cs (ConfigureServices + Configure).
+1067: // Everything — services (DI container registrations) and the HTTP pipeline — lives in this one file.
+1068: var builder = WebApplication.CreateBuilder(args);
+1070: // ---- Register services (equivalent of old Startup.ConfigureServices) ----
+1072: // MVC: Controllers + Views
+1073: builder.Services.AddControllersWithViews();
+1074: builder.Services.AddRazorPages();
+1076: // Q17: EF Core DbContext using SQLite (file-based, needs no external DB server)
+1077: builder.Services.AddDbContext<AppDbContext>(options =>
+1078: options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+1080: // Q19: ASP.NET Core Identity (authentication + role-based authorization)
+1081: builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+1082: {
+1083: options.SignIn.RequireConfirmedAccount = false;
+1084: })
+1085: .AddRoles<IdentityRole>()
+1086: .AddEntityFrameworkStores<AppDbContext>();
+1088: // Q18: Session state (server-side state management on stateless HTTP)
+1089: builder.Services.AddDistributedMemoryCache();
+1090: builder.Services.AddSession(options =>
+1091: {
+1092: options.IdleTimeout = TimeSpan.FromMinutes(30);
+1093: options.Cookie.HttpOnly = true;
+1094: });
+1096: var app = builder.Build();
+1098: // Create the SQLite schema for the lab demo when the database is new.
+1099: using (var scope = app.Services.CreateScope())
+1100: {
+1101: var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+1102: db.Database.EnsureCreated();
+1104: db.Database.ExecuteSqlRaw("""
+1105: CREATE TABLE IF NOT EXISTS Users (
+1106: Id INTEGER PRIMARY KEY AUTOINCREMENT,
+1107: Username TEXT NOT NULL UNIQUE
+1108: );
+1109: INSERT OR IGNORE INTO Users (Username) VALUES ('alice');
+1110: INSERT OR IGNORE INTO Users (Username) VALUES ('bob');
+1111: """);
+1113: var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+1114: if (!await roleManager.RoleExistsAsync("Admin"))
+1115: {
+1116: await roleManager.CreateAsync(new IdentityRole("Admin"));
+1117: }
+1119: var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+1120: const string adminEmail = "admin@localhost";
+1121: var admin = await userManager.FindByEmailAsync(adminEmail);
+1122: if (admin == null)
+1123: {
+1124: admin = new IdentityUser
+1125: {
+1126: UserName = adminEmail,
+1127: Email = adminEmail,
+1128: EmailConfirmed = true
+1129: };
+1130: await userManager.CreateAsync(admin, "Admin123!");
+1131: }
+1133: if (!await userManager.IsInRoleAsync(admin, "Admin"))
+1134: {
+1135: await userManager.AddToRoleAsync(admin, "Admin");
+1136: }
+1137: }
+1139: // ---- HTTP request pipeline (equivalent of old Startup.Configure) ----
+1141: if (!app.Environment.IsDevelopment())
+1142: {
+1143: app.UseExceptionHandler("/Home/Error");
+1144: app.UseHsts();
+1145: }
+1147: app.UseHttpsRedirection();
+1148: app.UseStaticFiles();
+1150: app.UseRouting();
+1152: app.UseSession();          // must come after UseRouting, before UseAuthorization
+1153: app.UseAuthentication();   // Q19: who is the user?
+1154: app.UseAuthorization();    // Q19: what are they allowed to do?
+1156: // Q15: Custom route — matches BEFORE the default convention route,
+1157: // so /employee/details/5 -> EmployeeController.Details(id = 5)
+1158: app.MapControllerRoute(
+1159: name: "employeeDetails",
+1160: pattern: "employee/details/{id:int}",
+1161: defaults: new { controller = "Employee", action = "Details" });
+1163: // Default conventional route: /{Controller}/{Action}/{id?}
+1164: app.MapControllerRoute(
+1165: name: "default",
+1166: pattern: "{controller=Home}/{action=Index}/{id?}");
+1168: app.MapRazorPages();
+1170: // Q16/Q17/Q20: attribute-routed API controllers (api/[controller]/...)
+1171: app.MapControllers();
+1173: app.Run();
+1175: Models/Product.cs
+1176: namespace NCCS_Lab_MVC.Models
+1177: {
+1178: // Q12/Q16: simple Product model used by MVC Controller and Web API Controller
+1179: public class Product
+1180: {
+1181: public int Id { get; set; }
+1182: public string Name { get; set; } = string.Empty;
+1183: public decimal Price { get; set; }
+1184: }
+1185: }
+1187: Controllers/Api/ProductsApiController.cs
+1188: using Microsoft.AspNetCore.Mvc;
+1189: using NCCS_Lab_MVC.Models;
+1191: namespace NCCS_Lab_MVC.Controllers.Api
+1192: {
+1193: // Q16: Web API Controller returning JSON
+1194: [ApiController]
+1195: [Route("api/[controller]")]
+1196: public class ProductsApiController : ControllerBase
+1197: {
+1198: // Static in-memory list acting as a simple data store for the demo
+1199: private static List<Product> products = new List<Product>
+1200: {
+1201: new Product { Id = 1, Name = "Keyboard", Price = 1500 },
+1202: new Product { Id = 2, Name = "Mouse", Price = 800 }
+1203: };
+1205: // GET api/productsapi
+1206: [HttpGet]
+1207: public ActionResult<List<Product>> Get()
+1208: {
+1209: return Ok(products); // 200 + JSON array
+1210: }
+1212: // GET api/productsapi/1
+1213: [HttpGet("{id}")]
+1214: public ActionResult<Product> Get(int id)
+1215: {
+1216: var product = products.FirstOrDefault(p => p.Id == id);
+1217: if (product == null) return NotFound();
+1218: return Ok(product);
+1219: }
+1221: // POST api/productsapi
+1222: [HttpPost]
+1223: public ActionResult<Product> Post([FromBody] Product newProduct)
+1224: {
+1225: newProduct.Id = products.Count + 1;
+1226: products.Add(newProduct);
+1227: // 201 Created + Location header pointing to the Get(id) action
+1228: return CreatedAtAction(nameof(Get), new { id = newProduct.Id }, newProduct);
+1229: }
+1230: }
+1231: }
+1232: Lab16.http (optional: test inside VS Code)
+1233: @host = http://localhost:5000
+1235: GET {{host}}/api/productsapi
+1237: ###
+1238: GET {{host}}/api/productsapi/1
+1240: ###
+1241: POST {{host}}/api/productsapi
+1242: Content-Type: application/json
+1244: {
+1245: "name": "Monitor",
+1246: "price": 22000
+1247: }
+1249: Sample JSON Output
+1250: GET /api/products  ->  200 OK
+1251: [
+1252: { "id": 1, "name": "Laptop",   "price": 95000 },
+1253: { "id": 2, "name": "Mouse",    "price": 1200 },
+1254: { "id": 3, "name": "Keyboard", "price": 2500 }
+1255: ]
+1257: POST /api/products  ->  201 Created
+1258: { "id": 4, "name": "Monitor", "price": 22000 }
+1260: Testing with Postman / Browser:
+1261: Browser: open http://localhost:<port>/api/products to see the JSON list (GET).
+1262: Postman GET: method GET, URL http://localhost:<port>/api/products/2, click Send.
+1263: Postman POST: method POST, URL http://localhost:<port>/api/products, Body > raw > JSON, enter {"name":"Monitor","price":22000}, click Send. Status 201 Created is returned.
+1264: Use the port printed by dotnet run ("Now listening on ..."). In the .http file, replace 5000 with that port.
+1265: Output Screenshot:
+1267: Lab 17
+1268: CRUD Operations using Entity Framework Core
+1269: Question: Using Entity Framework Core, create a simple data model and DbContext for a Book entity, and write code to perform Create, Read, Update, and Delete (CRUD) operations against a database.
+1270: Source Code:
+1271: Models/Book.cs
+1272: namespace NCCS_Lab_MVC.Models
+1273: {
+1274: // Q17: Entity used with EF Core for CRUD operations
+1275: public class Book
+1276: {
+1277: public int Id { get; set; }
+1278: public string Title { get; set; } = string.Empty;
+1279: public string Author { get; set; } = string.Empty;
+1280: public decimal Price { get; set; }
+1281: }
+1282: }
+1284: Data/AppDbContext.cs
+1285: using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+1286: using Microsoft.EntityFrameworkCore;
+1287: using NCCS_Lab_MVC.Models;
+1289: namespace NCCS_Lab_MVC.Data
+1290: {
+1291: // Q17: DbContext for Book entity.
+1292: // Inherits IdentityDbContext so Q19 (ASP.NET Core Identity) shares the same database.
+1293: public class AppDbContext : IdentityDbContext
+1294: {
+1295: public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+1297: public DbSet<Book> Books { get; set; } = null!;
+1298: }
+1299: }
+1301: Controllers/BookController.cs
+1302: using Microsoft.AspNetCore.Mvc;
+1303: using Microsoft.EntityFrameworkCore;
+1304: using NCCS_Lab_MVC.Data;
+1305: using NCCS_Lab_MVC.Models;
+1307: namespace NCCS_Lab_MVC.Controllers
+1308: {
+1309: // Q17: CRUD operations against a database using Entity Framework Core
+1310: [Route("api/books")]
+1311: [ApiController]
+1312: public class BookController : ControllerBase
+1313: {
+1314: private readonly AppDbContext _context;
+1316: public BookController(AppDbContext context)
+1317: {
+1318: _context = context;
+1319: }
+1321: // CREATE
+1322: [HttpPost]
+1323: public async Task<IActionResult> Create(Book book)
+1324: {
+1325: _context.Books.Add(book);
+1326: await _context.SaveChangesAsync();
+1327: return Ok(book);
+1328: }
+1330: // READ (all)
+1331: [HttpGet]
+1332: public async Task<IActionResult> GetAll()
+1333: {
+1334: var books = await _context.Books.ToListAsync();
+1335: return Ok(books);
+1336: }
+1338: // READ (single)
+1339: [HttpGet("{id}")]
+1340: public async Task<IActionResult> GetById(int id)
+1341: {
+1342: var book = await _context.Books.FindAsync(id);
+1343: if (book == null) return NotFound();
+1344: return Ok(book);
+1345: }
+1347: // UPDATE
+1348: [HttpPut("{id}")]
+1349: public async Task<IActionResult> Update(int id, Book updatedBook)
+1350: {
+1351: var book = await _context.Books.FindAsync(id);
+1352: if (book == null) return NotFound();
+1354: book.Title = updatedBook.Title;
+1355: book.Author = updatedBook.Author;
+1356: book.Price = updatedBook.Price;
+1358: await _context.SaveChangesAsync();
+1359: return Ok(book);
+1360: }
+1362: // DELETE
+1363: [HttpDelete("{id}")]
+1364: public async Task<IActionResult> Delete(int id)
+1365: {
+1366: var book = await _context.Books.FindAsync(id);
+1367: if (book == null) return NotFound();
+1369: _context.Books.Remove(book);
+1370: await _context.SaveChangesAsync();
+1371: return Ok($"Book {id} deleted");
+1372: }
+1373: }
+1374: }
+1377: Output Screenshot:
+1379: Lab 18
+1380: Session State Management
+1381: Question: Demonstrate server-side state management in ASP.NET Core by storing and retrieving a user's name using Session State across two different actions/pages.
+1382: Source Code:
+1383: Program.cs
+1384: using Microsoft.AspNetCore.Identity;
+1385: using Microsoft.EntityFrameworkCore;
+1386: using NCCS_Lab_MVC.Data;
+1388: // Q11: WebApplication.CreateBuilder replaces the old Startup.cs (ConfigureServices + Configure).
+1389: // Everything — services (DI container registrations) and the HTTP pipeline — lives in this one file.
+1390: var builder = WebApplication.CreateBuilder(args);
+1392: // ---- Register services (equivalent of old Startup.ConfigureServices) ----
+1394: // MVC: Controllers + Views
+1395: builder.Services.AddControllersWithViews();
+1396: builder.Services.AddRazorPages();
+1398: // Q17: EF Core DbContext using SQLite (file-based, needs no external DB server)
+1399: builder.Services.AddDbContext<AppDbContext>(options =>
+1400: options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+1402: // Q19: ASP.NET Core Identity (authentication + role-based authorization)
+1403: builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+1404: {
+1405: options.SignIn.RequireConfirmedAccount = false;
+1406: })
+1407: .AddRoles<IdentityRole>()
+1408: .AddEntityFrameworkStores<AppDbContext>();
+1410: // Q18: Session state (server-side state management on stateless HTTP)
+1411: builder.Services.AddDistributedMemoryCache();
+1412: builder.Services.AddSession(options =>
+1413: {
+1414: options.IdleTimeout = TimeSpan.FromMinutes(30);
+1415: options.Cookie.HttpOnly = true;
+1416: });
+1418: var app = builder.Build();
+1420: // Create the SQLite schema for the lab demo when the database is new.
+1421: using (var scope = app.Services.CreateScope())
+1422: {
+1423: var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+1424: db.Database.EnsureCreated();
+1426: db.Database.ExecuteSqlRaw("""
+1427: CREATE TABLE IF NOT EXISTS Users (
+1428: Id INTEGER PRIMARY KEY AUTOINCREMENT,
+1429: Username TEXT NOT NULL UNIQUE
+1430: );
+1431: INSERT OR IGNORE INTO Users (Username) VALUES ('alice');
+1432: INSERT OR IGNORE INTO Users (Username) VALUES ('bob');
+1433: """);
+1435: var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+1436: if (!await roleManager.RoleExistsAsync("Admin"))
+1437: {
+1438: await roleManager.CreateAsync(new IdentityRole("Admin"));
+1439: }
+1441: var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+1442: const string adminEmail = "admin@localhost";
+1443: var admin = await userManager.FindByEmailAsync(adminEmail);
+1444: if (admin == null)
+1445: {
+1446: admin = new IdentityUser
+1447: {
+1448: UserName = adminEmail,
+1449: Email = adminEmail,
+1450: EmailConfirmed = true
+1451: };
+1452: await userManager.CreateAsync(admin, "Admin123!");
+1453: }
+1455: if (!await userManager.IsInRoleAsync(admin, "Admin"))
+1456: {
+1457: await userManager.AddToRoleAsync(admin, "Admin");
+1458: }
+1459: }
+1461: // ---- HTTP request pipeline (equivalent of old Startup.Configure) ----
+1463: if (!app.Environment.IsDevelopment())
+1464: {
+1465: app.UseExceptionHandler("/Home/Error");
+1466: app.UseHsts();
+1467: }
+1469: app.UseHttpsRedirection();
+1470: app.UseStaticFiles();
+1472: app.UseRouting();
+1474: app.UseSession();          // must come after UseRouting, before UseAuthorization
+1475: app.UseAuthentication();   // Q19: who is the user?
+1476: app.UseAuthorization();    // Q19: what are they allowed to do?
+1478: // Q15: Custom route — matches BEFORE the default convention route,
+1479: // so /employee/details/5 -> EmployeeController.Details(id = 5)
+1480: app.MapControllerRoute(
+1481: name: "employeeDetails",
+1482: pattern: "employee/details/{id:int}",
+1483: defaults: new { controller = "Employee", action = "Details" });
+1485: // Default conventional route: /{Controller}/{Action}/{id?}
+1486: app.MapControllerRoute(
+1487: name: "default",
+1488: pattern: "{controller=Home}/{action=Index}/{id?}");
+1490: app.MapRazorPages();
+1492: // Q16/Q17/Q20: attribute-routed API controllers (api/[controller]/...)
+1493: app.MapControllers();
+1495: app.Run();
+1497: Controllers/SessionDemoController.cs
+1498: using Microsoft.AspNetCore.Mvc;
+1500: namespace NCCS_Lab_MVC.Controllers
+1501: {
+1502: // Q18: Server-side state management using Session State
+1503: public class SessionDemoController : Controller
+1504: {
+1505: // Page 1: capture name and store in Session
+1506: [HttpGet]
+1507: public IActionResult SetName()
+1508: {
+1509: return View();
+1510: }
+1512: [HttpPost]
+1513: public IActionResult SetName(string userName)
+1514: {
+1515: // Store in Session (server-side, keyed to the user's session cookie)
+1516: HttpContext.Session.SetString("UserName", userName);
+1517: return RedirectToAction("GetName");
+1518: }
+1520: // Page 2 (different action): retrieve name back from Session
+1521: [HttpGet]
+1522: public IActionResult GetName()
+1523: {
+1524: string? name = HttpContext.Session.GetString("UserName");
+1525: ViewBag.UserName = name ?? "No name stored in session yet.";
+1526: return View();
+1527: }
+1528: }
+1529: }
+1531: Views/SessionDemo/SetName.cshtml
+1532: @{
+1533: ViewData["Title"] = "Set Name (Session Demo)";
+1534: }
+1535: <h2>Enter your name</h2>
+1536: <form asp-action="SetName" method="post">
+1537: <input type="text" name="userName" class="form-control" placeholder="Your name" required />
+1538: <button type="submit" class="btn btn-primary mt-2">Save to Session</button>
+1539: </form>
+1541: Views/SessionDemo/GetName.cshtml
+1542: @{
+1543: ViewData["Title"] = "Get Name (Session Demo)";
+1544: }
+1545: <h2>Retrieved from Session</h2>
+1546: <p>Stored name: <strong>@ViewBag.UserName</strong></p>
+1547: <a asp-action="SetName">Go back</a>
+1549: Output Screenshot:
+1550: Lab 19
+1551: Authentication and Role-based Authorization using ASP.NET Core Identity
+1552: Question: Implement basic authentication and authorization in an ASP.NET Core MVC application using ASP.NET Core Identity, restricting access to an Admin action using the [Authorize] attribute with roles.
+1553: Source Code:
+1554: Program.cs
+1555: using Microsoft.AspNetCore.Identity;
+1556: using Microsoft.EntityFrameworkCore;
+1557: using NCCS_Lab_MVC.Data;
+1559: // Q11: WebApplication.CreateBuilder replaces the old Startup.cs (ConfigureServices + Configure).
+1560: // Everything — services (DI container registrations) and the HTTP pipeline — lives in this one file.
+1561: var builder = WebApplication.CreateBuilder(args);
+1563: // ---- Register services (equivalent of old Startup.ConfigureServices) ----
+1565: // MVC: Controllers + Views
+1566: builder.Services.AddControllersWithViews();
+1567: builder.Services.AddRazorPages();
+1569: // Q17: EF Core DbContext using SQLite (file-based, needs no external DB server)
+1570: builder.Services.AddDbContext<AppDbContext>(options =>
+1571: options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+1573: // Q19: ASP.NET Core Identity (authentication + role-based authorization)
+1574: builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+1575: {
+1576: options.SignIn.RequireConfirmedAccount = false;
+1577: })
+1578: .AddRoles<IdentityRole>()
+1579: .AddEntityFrameworkStores<AppDbContext>();
+1581: // Q18: Session state (server-side state management on stateless HTTP)
+1582: builder.Services.AddDistributedMemoryCache();
+1583: builder.Services.AddSession(options =>
+1584: {
+1585: options.IdleTimeout = TimeSpan.FromMinutes(30);
+1586: options.Cookie.HttpOnly = true;
+1587: });
+1589: var app = builder.Build();
+1591: // Create the SQLite schema for the lab demo when the database is new.
+1592: using (var scope = app.Services.CreateScope())
+1593: {
+1594: var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+1595: db.Database.EnsureCreated();
+1597: db.Database.ExecuteSqlRaw("""
+1598: CREATE TABLE IF NOT EXISTS Users (
+1599: Id INTEGER PRIMARY KEY AUTOINCREMENT,
+1600: Username TEXT NOT NULL UNIQUE
+1601: );
+1602: INSERT OR IGNORE INTO Users (Username) VALUES ('alice');
+1603: INSERT OR IGNORE INTO Users (Username) VALUES ('bob');
+1604: """);
+1606: var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+1607: if (!await roleManager.RoleExistsAsync("Admin"))
+1608: {
+1609: await roleManager.CreateAsync(new IdentityRole("Admin"));
+1610: }
+1612: var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+1613: const string adminEmail = "admin@localhost";
+1614: var admin = await userManager.FindByEmailAsync(adminEmail);
+1615: if (admin == null)
+1616: {
+1617: admin = new IdentityUser
+1618: {
+1619: UserName = adminEmail,
+1620: Email = adminEmail,
+1621: EmailConfirmed = true
+1622: };
+1623: await userManager.CreateAsync(admin, "Admin123!");
+1624: }
+1626: if (!await userManager.IsInRoleAsync(admin, "Admin"))
+1627: {
+1628: await userManager.AddToRoleAsync(admin, "Admin");
+1629: }
+1630: }
+1632: // ---- HTTP request pipeline (equivalent of old Startup.Configure) ----
+1634: if (!app.Environment.IsDevelopment())
+1635: {
+1636: app.UseExceptionHandler("/Home/Error");
+1637: app.UseHsts();
+1638: }
+1640: app.UseHttpsRedirection();
+1641: app.UseStaticFiles();
+1643: app.UseRouting();
+1645: app.UseSession();          // must come after UseRouting, before UseAuthorization
+1646: app.UseAuthentication();   // Q19: who is the user?
+1647: app.UseAuthorization();    // Q19: what are they allowed to do?
+1649: // Q15: Custom route — matches BEFORE the default convention route,
+1650: // so /employee/details/5 -> EmployeeController.Details(id = 5)
+1651: app.MapControllerRoute(
+1652: name: "employeeDetails",
+1653: pattern: "employee/details/{id:int}",
+1654: defaults: new { controller = "Employee", action = "Details" });
+1656: // Default conventional route: /{Controller}/{Action}/{id?}
+1657: app.MapControllerRoute(
+1658: name: "default",
+1659: pattern: "{controller=Home}/{action=Index}/{id?}");
+1661: app.MapRazorPages();
+1663: // Q16/Q17/Q20: attribute-routed API controllers (api/[controller]/...)
+1664: app.MapControllers();
+1666: app.Run();
+1668: Controllers/AdminController.cs
+1669: using Microsoft.AspNetCore.Authorization;
+1670: using Microsoft.AspNetCore.Mvc;
+1672: namespace NCCS_Lab_MVC.Controllers
+1673: {
+1674: public class AdminController : Controller
+1675: {
+1676: // Q19: Only users in the "Admin" role can access this action.
+1677: // Unauthenticated users -> redirected to Identity login page.
+1678: // Authenticated but non-Admin users -> 403 Forbidden.
+1679: [Authorize(Roles = "Admin")]
+1680: public IActionResult Index()
+1681: {
+1682: return View();
+1683: }
+1684: }
+1685: }
+1687: Views/Admin/Index.cshtml
+1688: @{
+1689: ViewData["Title"] = "Admin Panel";
+1690: }
+1691: <h2>Admin Panel</h2>
+1692: <p>Only users with the "Admin" role can see this page.</p>
+1694: How to test:
+1695: Open /Admin/Index without login: you are redirected to the Login page (authentication).
+1696: Register a new normal user and open /Admin/Index: the Access Denied page is shown (authorization).
+1697: Logout and login as admin@localhost/Admin123!, then open /Admin/Index: the Admin Panel is displayed.
+1698: /Admin/Dashboard works for any logged-in user and /Admin/Public works for everyone.
+1701: Output Screenshot:
+1703: Lab 20
+1704: Preventing SQL Injection with Parameterized Queries
+1705: Question: Write a short program/demo illustrating how a parameterized query (or Entity Framework) prevents SQL Injection compared to a vulnerable raw concatenated SQL query, and explain the difference.
+1706: Source Code:
+1707: Controllers/Api/SqlInjectionDemoController.cs
+1708: using Microsoft.AspNetCore.Mvc;
+1709: using Microsoft.Data.Sqlite;
+1711: namespace NCCS_Lab_MVC.Controllers.Api
+1712: {
+1713: // Q20: Demonstrates SQL Injection risk vs prevention
+1714: [ApiController]
+1715: [Route("api/[controller]")]
+1716: public class SqlInjectionDemoController : ControllerBase
+1717: {
+1718: private const string ConnStr = "Data Source=nccs_lab.db";
+1720: // VULNERABLE: builds SQL by directly concatenating user input.
+1721: // Input like:  ' OR '1'='1   would return ALL rows, bypassing the filter.
+1722: [HttpGet("vulnerable")]
+1723: public IActionResult Vulnerable(string username)
+1724: {
+1725: using var conn = new SqliteConnection(ConnStr);
+1726: conn.Open();
+1728: // DANGEROUS — do not use in real applications
+1729: string sql = $"SELECT * FROM Users WHERE Username = '{username}'";
+1731: using var cmd = new SqliteCommand(sql, conn);
+1732: using var reader = cmd.ExecuteReader();
+1734: var rows = new List<string>();
+1735: while (reader.Read())
+1736: rows.Add(reader["Username"].ToString() ?? "");
+1738: return Ok(new { query = sql, rows });
+1739: }
+1741: // SAFE: uses a parameterized query.
+1742: // The input is always treated as DATA, never as part of the SQL command,
+1743: // so ' OR '1'='1 is matched literally and returns no injected rows.
+1744: [HttpGet("safe")]
+1745: public IActionResult Safe(string username)
+1746: {
+1747: using var conn = new SqliteConnection(ConnStr);
+1748: conn.Open();
+1750: string sql = "SELECT * FROM Users WHERE Username = @username";
+1752: using var cmd = new SqliteCommand(sql, conn);
+1753: cmd.Parameters.AddWithValue("@username", username); // parameter, not string-concatenated
+1755: using var reader = cmd.ExecuteReader();
+1757: var rows = new List<string>();
+1758: while (reader.Read())
+1759: rows.Add(reader["Username"].ToString() ?? "");
+1761: return Ok(new { query = sql, rows });
+1762: }
+1763: }
+1764: }
+1766: Sample Output
+1767: 1) VULNERABLE (string concatenation)
+1768: SQL: SELECT COUNT(*) FROM Users WHERE Username = 'admin'
+1769: AND Password = '' OR '1'='1'
+1770: Login SUCCESS - HACKED!
+1772: 2) SAFE (parameterized query)
+1773: SQL: SELECT COUNT(*) FROM Users WHERE Username = @user AND Password = @pass
+1774: Login FAILED - attack blocked
+1776: 3) SAFE login with correct password
+1777: Login SUCCESS
+1779: Explanation of the Difference:
+1780: Vulnerable query: user input is joined directly into the SQL string. The input ' OR '1'='1 closes the quote and adds OR '1'='1', which is always true, so the WHERE clause matches every row and login succeeds without the real password.
+1781: Parameterized query: the SQL text contains placeholders (@user, @pass). The command text and the values are sent separately to the database, so the input is always treated as plain data, never as SQL code. The attacker's string is simply compared as a password and fails.
+1782: Entity Framework Core: LINQ queries (and FromSqlInterpolated) automatically generate parameterized SQL, so they are protected against SQL Injection by default.
+1783: Rule: never build SQL by concatenating user input; always use parameters, stored procedures with parameters, or an ORM like EF Core, and also validate input.
+1784: Output Screenshot:
