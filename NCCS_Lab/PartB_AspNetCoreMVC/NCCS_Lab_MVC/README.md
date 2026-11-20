@@ -22,18 +22,21 @@ links on the Home page.
 | 12 | Controller returning list to Razor view, foreach | `Controllers/ProductController.cs`, `Views/Product/Index.cshtml` |
 | 13 | Razor syntax + Tag Helpers (asp-for, asp-action) | `Views/Employee/Register.cshtml` |
 | 14 | Data Annotations + client/server validation | `Models/Employee.cs`, `Controllers/EmployeeController.cs` |
-| 15 | Custom URL routing (`/employee/details/5`) | `Program.cs` (MapControllerRoute "employeeDetails"), `EmployeeController.Details()` |
+| 15 | Custom URL routing (`/staff`) | `Program.cs` (MapControllerRoute "staff"), `EmployeeController.Staff()`, `Views/Employee/Staff.cshtml` |
 | 16 | Web API Controller, GET/POST, JSON | `Controllers/Api/ProductsApiController.cs` |
 | 17 | EF Core DbContext + CRUD for Book | `Data/AppDbContext.cs`, `Models/Book.cs`, `Controllers/BookController.cs` |
 | 18 | Session State across two actions | `Controllers/SessionDemoController.cs` + its Views |
 | 19 | ASP.NET Core Identity + [Authorize(Roles=...)] | `Program.cs` (AddDefaultIdentity), `Controllers/AdminController.cs` |
 | 20 | Parameterized query vs SQL Injection | `Controllers/Api/SqlInjectionDemoController.cs` |
 
-## Note on Q19 (Identity)
-This demo registers Identity services and protects `AdminController` with
-`[Authorize(Roles = "Admin")]`. To fully test login, scaffold Identity UI pages
-(`dotnet aot add ... Microsoft.VisualStudio.Web.CodeGeneration.Design` then
-`dotnet aspnet-codegenerator identity`) or add a minimal seed script that creates
-a user and assigns the "Admin" role via `UserManager`/`RoleManager`. The
-exam-relevant part — the `[Authorize(Roles = "Admin")]` attribute and Identity
-service registration — is complete and ready to explain/demonstrate as-is.
+## Q19 screenshot flow (Identity)
+The default Identity UI is available at `/Identity/Account/Register` and
+`/Identity/Account/Login`. The application seeds the admin account
+`admin@localhost` with password `Admin123!` and assigns it the `Admin` role.
+
+1. Open `/Identity/Account/Register` and show the registration form.
+2. Open `/Lab19/ResetLogin` to sign out and open `/Identity/Account/Login`,
+   then sign in as `admin@localhost` / `Admin123!`,
+   then open `/Admin/Index` and show the protected page.
+3. Sign out or use a private window, open `/Admin/Index`, and show the redirect
+   to `/Identity/Account/Login` (a signed-in non-admin receives 403 instead).

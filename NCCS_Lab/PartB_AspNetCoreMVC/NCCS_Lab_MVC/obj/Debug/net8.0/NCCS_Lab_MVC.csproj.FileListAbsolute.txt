@@ -134,3 +134,4 @@ C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartB_AspNetCoreMVC\NCCS_Lab_MVC\obj\
 C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartB_AspNetCoreMVC\NCCS_Lab_MVC\obj\Debug\net8.0\NCCS_Lab_MVC.pdb
 C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartB_AspNetCoreMVC\NCCS_Lab_MVC\obj\Debug\net8.0\NCCS_Lab_MVC.genruntimeconfig.cache
 C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartB_AspNetCoreMVC\NCCS_Lab_MVC\obj\Debug\net8.0\ref\NCCS_Lab_MVC.dll
+C:\Users\Admin\Downloads\NCCS_Lab\NCCS_Lab\PartB_AspNetCoreMVC\NCCS_Lab_MVC\obj\Debug\net8.0\NCCS_Lab_MVC.sourcelink.json

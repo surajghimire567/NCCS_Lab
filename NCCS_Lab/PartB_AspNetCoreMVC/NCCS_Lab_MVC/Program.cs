@@ -93,11 +93,11 @@ app.UseAuthentication();   // Q19: who is the user?
 app.UseAuthorization();    // Q19: what are they allowed to do?
 
 // Q15: Custom route — matches BEFORE the default convention route,
-// so /employee/details/5 -> EmployeeController.Details(id = 5)
+// so /staff -> EmployeeController.Staff()
 app.MapControllerRoute(
-    name: "employeeDetails",
-    pattern: "employee/details/{id:int}",
-    defaults: new { controller = "Employee", action = "Details" });
+    name: "staff",
+    pattern: "staff",
+    defaults: new { controller = "Employee", action = "Staff" });
 
 // Default conventional route: /{Controller}/{Action}/{id?}
 app.MapControllerRoute(

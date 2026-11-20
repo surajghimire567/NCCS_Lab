@@ -43,7 +43,6 @@ namespace NCCS_Lab_MVC.Controllers
         }
 
         [HttpGet]
-        [Route("staff")]
         public IActionResult Staff()
         {
             return View(GetEmployees());
